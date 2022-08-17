@@ -4,17 +4,42 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>laynce</title>
 </head>
 <body>
-  <host-element>  
-    <template shadowroot="open">    
-      <slot></slot>  
-    </template>  
+  <host-ele>  
+  </host-ele>
+  <template id="my-ele">
     <div>
       <h2>不要迷恋哥</h2>
       <p>哥就是个传说</p>
     </div>
-  </host-element>
+  </template>
+  <script>
+    class HostDetail extends HTMLElement {
+      constructor() {
+        super()
+        const shadow = this.attachShadow({mode: 'closed'})
+        const myEle = document.querySelector('#my-ele')
+        const style = document.createElement('style')
+        style.textContent = `
+          div {
+            margin: 200px auto;
+            width: 400px;
+            text-align: center;
+          }
+
+          p {
+            background-image: linear-gradient(to right , #7A88FF, #7AFFAF);
+            line-height: 40px;
+          }
+        `
+        shadow.appendChild(style)
+        shadow.appendChild(myEle.content)
+      }
+    }
+
+    customElements.define('host-ele', HostDetail)
+  </script>
 </body>
 </html>
